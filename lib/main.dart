@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,7 @@ class HabitFlow extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 34, 192, 28)),
       ),
-      home: const MyHomePage(title: 'HabitFlow Home Page'),
+      home: const LoginScreen(), //const MyHomePage(title: 'HabitFlow Home Page'),
     );
   }
 }
