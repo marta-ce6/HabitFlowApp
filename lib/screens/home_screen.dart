@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:habitflow/main.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void logout() async {
+  void logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MyHomePage(title: 'HabitFlow'),
+      ),
+      (route) => false,
+    );
   }
 
   @override
@@ -15,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text("HabitFlow Home"),
         actions: [
           IconButton(
-            onPressed: logout,
+            onPressed: () => logout(context),
             icon: const Icon(Icons.logout),
           )
         ],
@@ -29,3 +38,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
