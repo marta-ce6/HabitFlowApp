@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:habitflow/screens/register_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
+import 'screens/home_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {

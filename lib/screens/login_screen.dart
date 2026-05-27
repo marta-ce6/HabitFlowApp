@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,6 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
       await auth.login(
         emailController.text,
         passwordController.text,
+      );
+
+      Navigator.pushAndRemoveUntil(context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),),
+        (route) => false,
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
+import 'home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -28,7 +29,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         passwordController.text,
       );
 
-      Navigator.pop(context);
+      Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => const HomeScreen(),),
+      (route) => false,
+    );
 
     } catch (e) {
 
