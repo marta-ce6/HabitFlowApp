@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habitflow/main.dart';
 import 'package:habitflow/screens/habits_screen.dart';
+import 'package:habitflow/services/auth_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   void logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
+    final auth = AuthService();
+    await auth.logout();
 
     Navigator.pushAndRemoveUntil(
       context,
@@ -35,9 +37,9 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
-            const Text(
-              "Logged in",
-              style: TextStyle(fontSize: 20),
+            Text(
+              "Logged in as: ${FirebaseAuth.instance.currentUser?.email ?? 'Unknown'}",
+              style: const TextStyle(fontSize: 20),
             ),
 
             const SizedBox(height: 20),
