@@ -50,6 +50,35 @@ class _HabitsScreenState extends State<HabitsScreen> {
             ),
           ),
 
+          StreamBuilder(
+            stream: service.getHabits(),
+            builder: (context, snapshot) {
+
+              if (!snapshot.hasData) {
+                return const SizedBox();
+              }
+
+              final docs = snapshot.data!.docs;
+
+              int completed = 0;
+
+              for (var doc in docs) {
+                final data = doc.data() as Map<String, dynamic>;
+                if (data['done'] == true) {
+                  completed++;
+                }
+              }
+
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  "Completed habits: $completed / ${docs.length}",
+                  style: const TextStyle(fontSize: 16),
+                ),
+              );
+            },
+          ),
+
           Expanded(
             child: StreamBuilder(
               stream: service.getHabits(),
@@ -70,6 +99,11 @@ class _HabitsScreenState extends State<HabitsScreen> {
 
                     return ListTile(
                       title: Text(data['name']),
+                      subtitle: Text(
+                      data['createdAt'] != null
+                          ? data['createdAt'].toDate().toString().split(' ')[0]
+                          : '',
+                    ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
