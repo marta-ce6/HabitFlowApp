@@ -116,6 +116,20 @@ class _HabitsScreenState extends State<HabitsScreen> {
                           ),
 
                           IconButton(
+                            icon: Icon(
+                              data['isImportant'] == true
+                                  ? Icons.star
+                                  : Icons.star_border,
+                              color: Colors.amber,
+                            ),
+                            onPressed: () {
+                              service.toggleImportant(
+                                doc.id,
+                                data['isImportant'] ?? false,
+                              );
+                            },
+                          ),
+                          IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () {
                               service.deleteHabit(doc.id);
