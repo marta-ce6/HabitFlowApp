@@ -38,4 +38,13 @@ class HabitService {
         });
   }
 
+  Future<void> deleteHabit(String id) async {
+  await _db
+      .collection('users')
+      .doc(_uid)
+      .collection('habits')
+      .doc(id)
+      .delete();
+}
+
 }

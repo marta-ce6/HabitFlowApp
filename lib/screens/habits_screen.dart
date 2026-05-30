@@ -70,11 +70,25 @@ class _HabitsScreenState extends State<HabitsScreen> {
 
                     return ListTile(
                       title: Text(data['name']),
-                      trailing: Checkbox(
-                        value: data['done'],
-                        onChanged: (_) {
-                          service.toggleHabit(doc.id, data['done']);
-                        },
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          Checkbox(
+                            value: data['done'],
+                            onChanged: (_) {
+                              service.toggleHabit(doc.id, data['done']);
+                            },
+                          ),
+
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              service.deleteHabit(doc.id);
+                            },
+                          ),
+
+                        ],
                       ),
                     );
 
