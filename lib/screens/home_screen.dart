@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habitflow/main.dart';
+import 'package:habitflow/screens/habits_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (context) => const MyHomePage(title: 'HabitFlow'),
+      builder: (context) => const MyHomePage(title: 'HabitFlow'),
       ),
       (route) => false,
     );
@@ -29,10 +30,31 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(
-        child: Text(
-          "Logged in",
-          style: TextStyle(fontSize: 20),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            const Text(
+              "Logged in",
+              style: TextStyle(fontSize: 20),
+            ),
+
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HabitsScreen(),
+                  ),
+                );
+              },
+              child: const Text("Go to Habits"),
+            ),
+
+          ],
         ),
       ),
     );
