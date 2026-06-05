@@ -69,11 +69,31 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 }
               }
 
+              double progress =
+                  docs.isEmpty ? 0 : completed / docs.length;
+
               return Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  "Completed habits: $completed / ${docs.length}",
-                  style: const TextStyle(fontSize: 16),
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  children: [
+
+                    Text(
+                      "Completed habits: $completed / ${docs.length}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    LinearProgressIndicator(
+                      value: progress,
+                      minHeight: 10,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+
+                  ],
                 ),
               );
             },
