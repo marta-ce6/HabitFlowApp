@@ -11,8 +11,7 @@ class HomeScreen extends StatelessWidget {
     final auth = AuthService();
     await auth.logout();
 
-    Navigator.pushAndRemoveUntil(
-      context,
+    Navigator.pushAndRemoveUntil(context,
       MaterialPageRoute(
       builder: (context) => const MyHomePage(title: 'HabitFlow'),
       ),
