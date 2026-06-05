@@ -38,6 +38,17 @@ class HabitService {
         });
   }
 
+  
+  Future<void> toggleImportant(String id, bool current) async {
+  await _db
+      .collection('users')
+      .doc(_uid)
+      .collection('habits')
+      .doc(id)
+      .update({
+    'isImportant': !current,});
+  }
+
   Future<void> deleteHabit(String id) async {
   await _db
       .collection('users')
