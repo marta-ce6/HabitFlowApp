@@ -160,6 +160,15 @@ class _HabitsScreenState extends State<HabitsScreen> {
                   return 0;
                 });
 
+                if (filteredDocs.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "No habits yet. Add your first one!",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  );
+                }
+                
                 return ListView.builder(
                   itemCount: filteredDocs.length,
                   itemBuilder: (context, index) {
