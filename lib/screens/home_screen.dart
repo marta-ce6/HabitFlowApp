@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habitflow/main.dart';
 import 'package:habitflow/screens/habits_screen.dart';
 import 'package:habitflow/screens/stats_screen.dart';
+import 'package:habitflow/services/auth_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
