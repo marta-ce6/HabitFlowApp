@@ -75,8 +75,14 @@ class _HabitsScreenState extends State<HabitsScreen> {
             stream: service.getHabits(),
             builder: (context, snapshot) {
 
+              if (snapshot.hasError) {
+                return const Center(
+                  child: Text("Something went wrong"),
+                );
+              }
+
               if (!snapshot.hasData) {
-                return const SizedBox();
+                return const Center(child: CircularProgressIndicator());
               }
 
               final docs = snapshot.data!.docs;
@@ -134,6 +140,12 @@ class _HabitsScreenState extends State<HabitsScreen> {
               stream: service.getHabits(),
               builder: (context, snapshot) {
 
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Something went wrong"),
+                  );
+                }
+
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -169,6 +181,14 @@ class _HabitsScreenState extends State<HabitsScreen> {
                   return 0;
                 });
 
+                if (filteredDocs.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      "No habits yet. Add your first one!",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  );
+                }
                 docs.sort((a, b) {
                   final aData = a.data() as Map<String, dynamic>;
                   final bData = b.data() as Map<String, dynamic>;

@@ -14,6 +14,12 @@ class StatsScreen extends StatelessWidget {
         stream: service.getHabits(),
         builder: (context, snapshot) {
 
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text("Something went wrong"),
+            );
+          }
+
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
