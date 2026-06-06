@@ -12,6 +12,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
 
   final service = HabitService();
   final controller = TextEditingController();
+  String searchText = '';
 
   void addHabit() async {
     if (controller.text.isEmpty) return;
@@ -47,6 +48,26 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 )
 
               ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+
+              decoration: const InputDecoration(
+                hintText: "Search habits...",
+                prefixIcon: Icon(Icons.search),
+              ),
+
+              onChanged: (value) {
+
+                setState(() {
+                  searchText = value.toLowerCase();
+                });
+
+              },
+
             ),
           ),
 
@@ -118,6 +139,35 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 }
 
                 final docs = snapshot.data!.docs;
+                final filteredDocs = docs.where((doc) {
+
+                  final data = doc.data() as Map<String, dynamic>;
+
+                  final name =
+                      data['name'].toString().toLowerCase();
+
+                  return name.contains(searchText);
+
+                }).toList();
+
+                filteredDocs.sort((a, b) {
+
+                  final aData = a.data() as Map<String, dynamic>;
+                  final bData = b.data() as Map<String, dynamic>;
+
+                  bool aFavorite = aData['isImportant'] ?? false;
+                  bool bFavorite = bData['isImportant'] ?? false;
+
+                  if (aFavorite && !bFavorite) {
+                    return -1;
+                  }
+
+                  if (!aFavorite && bFavorite) {
+                    return 1;
+                  }
+
+                  return 0;
+                });
 
                 docs.sort((a, b) {
                   final aData = a.data() as Map<String, dynamic>;
@@ -131,10 +181,10 @@ class _HabitsScreenState extends State<HabitsScreen> {
                 });
 
                 return ListView.builder(
-                  itemCount: docs.length,
+                  itemCount: filteredDocs.length,
                   itemBuilder: (context, index) {
 
-                    final doc = docs[index];
+                    final doc = filteredDocs[index];
                     final data = doc.data() as Map<String, dynamic>;
 
                     return ListTile(

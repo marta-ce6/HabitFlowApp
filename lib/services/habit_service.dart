@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class HabitService {
 
   final _db = FirebaseFirestore.instance;
+  final CollectionReference habits =
+      FirebaseFirestore.instance.collection('habits');
 
   String get _uid => FirebaseAuth.instance.currentUser!.uid;
 
@@ -15,6 +17,7 @@ class HabitService {
         .add({
           'name': name,
           'done': false,
+          'isImportant': false,
           'createdAt': Timestamp.now(),
         });
   }
