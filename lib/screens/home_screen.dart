@@ -8,10 +8,10 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   void logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
+    final auth = AuthService();
+    await auth.logout();
 
-    Navigator.pushAndRemoveUntil(
-      context,
+    Navigator.pushAndRemoveUntil(context,
       MaterialPageRoute(
       builder: (context) => const MyHomePage(title: 'HabitFlow'),
       ),
@@ -36,9 +36,9 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
-            const Text(
-              "Logged in",
-              style: TextStyle(fontSize: 20),
+            Text(
+              "Logged in as: ${FirebaseAuth.instance.currentUser?.email ?? 'Unknown'}",
+              style: const TextStyle(fontSize: 20),
             ),
 
             const SizedBox(height: 20),
