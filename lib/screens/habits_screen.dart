@@ -82,7 +82,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
               }
 
               if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
+                return const SizedBox(height: 60);
               }
 
               final docs = snapshot.data!.docs;
@@ -226,6 +226,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                           ),
 
                           IconButton(
+                            tooltip: "Mark as favorite",
                             icon: Icon(
                               data['isImportant'] == true
                                   ? Icons.star
@@ -241,6 +242,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                           ),
 
                           IconButton(
+                            tooltip: "Delete habit",
                             icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () {
                               service.deleteHabit(doc.id);
