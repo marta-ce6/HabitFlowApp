@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:habitflow/main.dart';
 import 'package:habitflow/screens/habits_screen.dart';
+import 'package:habitflow/screens/stats_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -52,6 +53,18 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               child: const Text("Go to Habits"),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StatsScreen(),
+                  ),
+                );
+              },
+              child: const Text("View Stats"),
             ),
 
           ],
