@@ -86,6 +86,16 @@ class _HabitsScreenState extends State<HabitsScreen> {
               }
 
               final docs = snapshot.data!.docs;
+              docs.sort((a, b) {
+                final aData = a.data() as Map<String, dynamic>;
+                final bData = b.data() as Map<String, dynamic>;
+
+                final aImportant = aData['isImportant'] == true;
+                final bImportant = bData['isImportant'] == true;
+
+                if (aImportant == bImportant) return 0;
+                return aImportant ? -1 : 1;
+              });
 
               int completed = 0;
 
@@ -98,9 +108,8 @@ class _HabitsScreenState extends State<HabitsScreen> {
 
               double progress =
                   docs.isEmpty ? 0 : completed / docs.length;
-
               return Padding(
-                padding: const EdgeInsets.all(15),
+                 padding: const EdgeInsets.all(15),
                 child: Column(
                   children: [
 
@@ -180,6 +189,16 @@ class _HabitsScreenState extends State<HabitsScreen> {
                     ),
                   );
                 }
+                docs.sort((a, b) {
+                  final aData = a.data() as Map<String, dynamic>;
+                  final bData = b.data() as Map<String, dynamic>;
+
+                  final aImportant = aData['isImportant'] == true;
+                  final bImportant = bData['isImportant'] == true;
+
+                  if (aImportant == bImportant) return 0;
+                  return aImportant ? -1 : 1;
+                });
 
                 return ListView.builder(
                   itemCount: filteredDocs.length,
@@ -221,6 +240,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
                               );
                             },
                           ),
+
                           IconButton(
                             tooltip: "Delete habit",
                             icon: const Icon(Icons.delete, color: Colors.red),
