@@ -31,7 +31,6 @@ A visual progress indicator is also included to provide immediate feedback on co
 The project follows a simple layered architecture to ensure maintainability and separation of concepts. The user interface layer is responsible for displying screens and handling user interactions. This includes screens such as login, registration, home, habits and statistics.
 The service layer contains the core business logic and handles all communication with Firebase. Authentication logic is separated into an AuthService, while all habit-related operations (create, update, delete and search) are handled by a HabitService.
 Firebase acts as the backend for both authentication and real-time database storage using Cloud Firestore. This allows changes to be reflected instantly across the application without manual refresh.
-
 The interface was designed with simplicity and usability in mind. The goal was to ensure that any user can understand and interact with the application without instructions. Several UX improvements were included throughout the development process, such as loading indicators during asynchronous operations, empty states when no data is available and tooltips on interactive elements to improve clarity. The layout is intentionally minimal to avoid distractions and to keep the focus on habit tracking
 
 - Data handling and privacy
